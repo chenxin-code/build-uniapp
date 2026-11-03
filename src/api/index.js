@@ -1,33 +1,71 @@
-import axios from 'axios';
-
 // ----------------------------------------- 百度新闻 -----------------------------------------//
 
-// 创建 axios 实例
-export const baiduNews = axios.create({
-  baseURL: '/baiduNews/',
-  timeout: 5000,
-});
+// 百度新闻请求
+export const baiduNews = (config) => {
+  return new Promise((resolve, reject) => {
+    // #ifdef H5
+    // H5 使用 axios
+    import('axios').then(({ default: axios }) => {
+      const instance = axios.create({
+        baseURL: '/baiduNews/',
+        timeout: 5000,
+      });
+      instance(config).then(resolve).catch(reject);
+    });
+    // #endif
 
-// 请求拦截
-baiduNews.interceptors.request.use(config => {
-  console.log('请求拦截', 'config', config);
-  return config;
-}, error => {
-  return Promise.reject(error);
-});
-
-// 响应拦截
-baiduNews.interceptors.response.use(response => {
-  console.log('响应拦截', 'response', response);
-  return response;
-}, error => {
-  return Promise.reject(error);
-});
+    // #ifdef MP-WEIXIN
+    // 小程序使用 wx.request
+    const params = config.params || {};
+    const queryString = Object.keys(params).map(key => `${key}=${encodeURIComponent(params[key])}`).join('&');
+    const url = `https://news.baidu.com/${config.url}?${queryString}`;
+    
+    wx.request({
+      url: url,
+      method: config.method || 'GET',
+      success: (res) => {
+        resolve({ data: res.data });
+      },
+      fail: (err) => {
+        reject(err);
+      }
+    });
+    // #endif
+  });
+};
 
 // ----------------------------------------- 淘宝搜索提示 -----------------------------------------//
 
-// 创建 axios 实例
-export const taobaoSearchSuggest = axios.create({
-  baseURL: '/taobaoSearchSuggest/',
-  timeout: 5000,
-});
+// 淘宝搜索提示请求
+export const taobaoSearchSuggest = (config) => {
+  return new Promise((resolve, reject) => {
+    // #ifdef H5
+    // H5 使用 axios
+    import('axios').then(({ default: axios }) => {
+      const instance = axios.create({
+        baseURL: '/taobaoSearchSuggest/',
+        timeout: 5000,
+      });
+      instance(config).then(resolve).catch(reject);
+    });
+    // #endif
+
+    // #ifdef MP-WEIXIN
+    // 小程序使用 wx.request
+    const params = config.params || {};
+    const queryString = Object.keys(params).map(key => `${key}=${encodeURIComponent(params[key])}`).join('&');
+    const url = `https://suggest.taobao.com/${config.url}?${queryString}`;
+    
+    wx.request({
+      url: url,
+      method: config.method || 'GET',
+      success: (res) => {
+        resolve({ data: res.data });
+      },
+      fail: (err) => {
+        reject(err);
+      }
+    });
+    // #endif
+  });
+};
