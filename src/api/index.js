@@ -2,9 +2,9 @@ import axios from 'axios';
 
 // ----------------------------------------- 百度新闻 -----------------------------------------//
 
-// 创建axios实例
+// 创建 axios 实例
 export const baiduNews = axios.create({
-  baseURL: 'https://news.baidu.com/',
+  baseURL: '/baiduNews/',
   timeout: 5000,
 });
 
@@ -26,8 +26,8 @@ baiduNews.interceptors.response.use(response => {
 
 // ----------------------------------------- 淘宝搜索提示 -----------------------------------------//
 
-// 创建axios实例
+// 创建 axios 实例
 export const taobaoSearchSuggest = axios.create({
-  baseURL: 'https://suggest.taobao.com/',
+  baseURL: '/taobaoSearchSuggest/',
   timeout: 5000,
 });
