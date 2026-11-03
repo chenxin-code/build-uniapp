@@ -4,6 +4,7 @@
     <view class="text-area">
       <text class="title">{{ title }}</text>
     </view>
+    <button class="nav-btn" @click="goToTestApi">API 测试页面</button>
   </view>
 </template>
 
@@ -15,7 +16,13 @@ export default {
     }
   },
   onLoad() {},
-  methods: {},
+  methods: {
+    goToTestApi() {
+      uni.navigateTo({
+        url: '/pages/test-api/index'
+      });
+    }
+  },
 }
 </script>
 
@@ -44,5 +51,16 @@ export default {
 .title {
   font-size: 36rpx;
   color: #8f8f94;
+}
+
+.nav-btn {
+  margin-top: 50rpx;
+  width: 300rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  background-color: #409eff;
+  color: #fff;
+  border-radius: 8rpx;
+  font-size: 28rpx;
 }
 </style>
