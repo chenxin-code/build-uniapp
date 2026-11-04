@@ -54,7 +54,7 @@
               <!-- 数据行 -->
               <div class="table-row" v-for="(row, rowIdx) in tableData" :key="rowIdx" :class="{ 'stripe-even': rowIdx % 2 === 1 }">
                 <div class="table-cell" v-for="(header, colIdx) in tableHeaders" :key="colIdx">
-                  <text v-if="header.key === 'url'" class="link-cell" @click="openLink(row[header.key])">{{ row[header.key] }}</text>
+                  <text v-if="header.key === 'url'" class="link-icon" @click="openLink(row[header.key])">🔗</text>
                   <text v-else>{{ row[header.key] }}</text>
                 </div>
               </div>
@@ -444,14 +444,13 @@ export default {
   white-space: nowrap;
 }
 
-.link-cell {
-  color: #42b983;
+.link-icon {
   cursor: pointer;
-  text-decoration: underline;
+  font-size: 18px;
 }
 
-.link-cell:hover {
-  color: #66d9a3;
+.link-icon:hover {
+  opacity: 0.7;
 }
 
 .json-container {
