@@ -185,11 +185,8 @@ export default {
       window.open(url, '_blank');
       // #endif
       // #ifdef MP-WEIXIN
-      uni.setClipboardData({
-        data: url,
-        success: () => {
-          uni.showToast({ title: '链接已复制', icon: 'none' });
-        }
+      uni.navigateTo({
+        url: `/pages/webview/index?url=${encodeURIComponent(url)}`
       });
       // #endif
     },
