@@ -111,6 +111,10 @@ export default {
       });
     },
     getTaobaoSearchSuggest() {
+      if (!this.query || !this.query.trim()) {
+        uni.showToast({ title: '请输入搜索内容', icon: 'none' });
+        return;
+      }
       taobaoSearchSuggest({
         method: 'get',
         url: 'sug',
