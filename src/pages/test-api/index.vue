@@ -20,7 +20,7 @@
     <div class="tab-content">
       <!-- 百度新闻 -->
       <div v-if="activeName === '百度新闻'" class="tab-pane">
-        <button class="btn-primary" @click="getBaiduNews()">GET</button>
+        <button class="btn-primary" @click="getBaiduNews()">GET 百度新闻</button>
       </div>
 
       <!-- 淘宝搜索提示 -->
@@ -33,7 +33,7 @@
           />
           <text v-if="query" class="clear-btn" @click="query = ''">✕</text>
         </div>
-        <button class="btn-primary" @click="getTaobaoSearchSuggest()">GET</button>
+        <button class="btn-primary" @click="getTaobaoSearchSuggest()">GET 淘宝搜索</button>
       </div>
     </div>
 
@@ -285,14 +285,12 @@ export default {
 
 .search-input {
   flex: 1;
-  height: 36px;
-  padding: 0 15px;
+  padding: 10px 15px;
   border: 1px solid #dcdfe6;
   border-radius: 4px;
   font-size: 14px;
   outline: none;
   transition: border-color 0.3s;
-  box-sizing: border-box;
 }
 
 .search-input:focus {
@@ -324,8 +322,7 @@ export default {
 }
 
 .btn-primary {
-  height: 36px;
-  padding: 0 20px;
+  padding: 10px 20px;
   background-color: #42b983;
   color: #fff;
   border: none;
@@ -333,7 +330,6 @@ export default {
   cursor: pointer;
   font-size: 14px;
   transition: background-color 0.3s;
-  box-sizing: border-box;
 }
 
 .btn-primary:hover {
