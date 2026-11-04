@@ -50,7 +50,10 @@
               </div>
               <!-- 数据行 -->
               <div class="table-row" v-for="(row, rowIdx) in tableData" :key="rowIdx" :class="{ 'stripe-even': rowIdx % 2 === 1 }">
-                <div class="table-cell" v-for="(header, colIdx) in tableHeaders" :key="colIdx">{{ row[header.key] }}</div>
+                <div class="table-cell" v-for="(header, colIdx) in tableHeaders" :key="colIdx">
+                  <text v-if="header.key === 'url'" class="link-cell" @click="openLink(row[header.key])">{{ row[header.key] }}</text>
+                  <text v-else>{{ row[header.key] }}</text>
+                </div>
               </div>
             </div>
           </div>
@@ -175,6 +178,20 @@ export default {
       
       this.jsonContent = JSON.stringify(data);
       this.dialogVisible = true;
+    },
+    openLink(url) {
+      if (!url) return;
+      // #ifdef H5
+      window.open(url, '_blank');
+      // #endif
+      // #ifdef MP-WEIXIN
+      uni.setClipboardData({
+        data: url,
+        success: () => {
+          uni.showToast({ title: '链接已复制', icon: 'none' });
+        }
+      });
+      // #endif
     },
   },
   mounted() {
@@ -389,6 +406,16 @@ export default {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.link-cell {
+  color: #409eff;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.link-cell:hover {
+  color: #66b1ff;
 }
 
 .json-container {
