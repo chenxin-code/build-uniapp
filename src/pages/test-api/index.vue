@@ -25,11 +25,14 @@
 
       <!-- 淘宝搜索提示 -->
       <div v-if="activeName === '淘宝搜索提示'" class="tab-pane">
-        <input 
-          v-model="query" 
-          placeholder="请输入内容" 
-          class="search-input"
-        />
+        <div class="search-input-wrapper">
+          <input 
+            v-model="query" 
+            placeholder="请输入内容" 
+            class="search-input"
+          />
+          <text v-if="query" class="clear-btn" @click="query = ''">✕</text>
+        </div>
         <button class="btn-primary" @click="getTaobaoSearchSuggest()">GET 淘宝搜索</button>
       </div>
     </div>
@@ -292,6 +295,30 @@ export default {
 
 .search-input:focus {
   border-color: #409eff;
+}
+
+.search-input-wrapper {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-input-wrapper .search-input {
+  padding-right: 30px;
+}
+
+.clear-btn {
+  position: absolute;
+  right: 10px;
+  color: #909399;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.clear-btn:hover {
+  color: #606266;
 }
 
 .btn-primary {
