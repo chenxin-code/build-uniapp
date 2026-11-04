@@ -133,21 +133,10 @@ export default {
         // 百度新闻数据结构：data.data.LocalNews.data
         const localNews = data?.data?.LocalNews?.data;
         
-        // 处理 rows 可能是对象或数组的情况
-        if (localNews?.rows) {
-          if (Array.isArray(localNews.rows)) {
-            items = localNews.rows;
-          } else if (typeof localNews.rows === 'object') {
-            // rows 可能是单个新闻对象，或者包含 pic 等子对象
-            if (localNews.rows.pic && typeof localNews.rows.pic === 'object') {
-              items = [localNews.rows.pic];
-            } else {
-              items = [localNews.rows];
-            }
-          }
-        } else if (localNews?.first) {
-          items = Array.isArray(localNews.first) ? localNews.first : [localNews.first];
-        }
+        // 取 rows.first 和 rows.second 字段，合并展示
+        const first = Array.isArray(localNews?.rows?.first) ? localNews.rows.first : [];
+        const second = Array.isArray(localNews?.rows?.second) ? localNews.rows.second : [];
+        items = [...first, ...second];
         
         if (items.length > 0 && typeof items[0] === 'object') {
           this.tableHeaders = [
