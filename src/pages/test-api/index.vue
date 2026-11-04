@@ -439,9 +439,7 @@ export default {
   text-align: center;
   font-size: 13px;
   color: #606266;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  word-break: break-all;
 }
 
 .link-icon {
