@@ -264,9 +264,9 @@ export default {
 }
 
 .tab-item.active {
-  color: #007aff;
-  border-bottom-color: #007aff;
-  background-color: #e6f2ff;
+  color: #409eff;
+  border-bottom-color: #409eff;
+  background-color: #f0f9ff;
 }
 
 .tab-content {
@@ -294,7 +294,7 @@ export default {
 }
 
 .search-input:focus {
-  border-color: #007aff;
+  border-color: #409eff;
 }
 
 .search-input-wrapper {
@@ -323,7 +323,7 @@ export default {
 
 .btn-primary {
   padding: 10px 20px;
-  background-color: #007aff;
+  background-color: #409eff;
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -333,11 +333,11 @@ export default {
 }
 
 .btn-primary:hover {
-  background-color: #3395ff;
+  background-color: #66b1ff;
 }
 
 .btn-primary:active {
-  background-color: #0062cc;
+  background-color: #3a8ee6;
 }
 
 /* 弹窗样式 */
@@ -391,7 +391,7 @@ export default {
 }
 
 .stats-number {
-  color: #007aff;
+  color: #409eff;
   font-size: 18px;
   font-weight: 600;
 }
@@ -441,22 +441,22 @@ export default {
 }
 
 .link-cell {
-  color: #007aff;
+  color: #409eff;
   cursor: pointer;
   text-decoration: underline;
 }
 
 .link-cell:hover {
-  color: #3395ff;
+  color: #66b1ff;
 }
 
 .json-container {
   max-height: 200px;
   overflow-y: auto;
-  border: 1px solid #b7eb8f;
+  border: 1px solid #e1f3d8;
   border-radius: 4px;
   padding: 12px;
-  background-color: #f6ffed;
+  background-color: #f0f9eb;
 }
 
 .json-content {
@@ -464,7 +464,7 @@ export default {
   font-size: 12px;
   word-break: break-all;
   white-space: pre-wrap;
-  color: #4cd964;
+  color: #67c23a;
 }
 
 .dialog-footer {
@@ -485,7 +485,7 @@ export default {
 }
 
 .btn-close:hover {
-  color: #007aff;
-  border-color: #007aff;
+  color: #409eff;
+  border-color: #409eff;
 }
 </style>
