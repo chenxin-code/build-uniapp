@@ -195,7 +195,7 @@ export default {
       // #ifdef H5
       window.open(url, '_blank');
       // #endif
-      // #ifdef MP-WEIXIN
+      // #ifndef H5
       uni.navigateTo({
         url: `/pages/webview/index?url=${encodeURIComponent(url)}`
       });
