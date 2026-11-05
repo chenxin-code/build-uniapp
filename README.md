@@ -1,11 +1,14 @@
 # build-uniapp
 
-基于 uni-app (Vue 3 + Vite) 的跨平台项目，支持 H5 和微信小程序。
+基于 uni-app (Vue 3 + Vite) 的跨平台项目，支持 H5、微信小程序、抖音小程序等多端运行。
 
 ## 功能
 
 - API 测试页面（百度新闻、淘宝搜索提示）
-- 跨平台 API 适配（H5 使用 axios，小程序使用 wx.request）
+- 统一使用 `uni.request` 进行网络请求，全平台兼容
+- 开发环境通过 Vite proxy 解决跨域，生产环境直接请求目标 URL
+- 弹窗展示表格数据，支持链接跳转（H5 新窗口打开，小程序 web-view）
+- 输入校验、清空按钮、表格数据重置等交互优化
 
 ## 开发
 
@@ -18,7 +21,17 @@ npm run dev:h5
 
 # 微信小程序开发
 npm run dev:mp-weixin
+
+# 抖音小程序开发
+npm run dev:mp-toutiao
 ```
+
+### 小程序运行说明
+
+1. 执行对应平台的 dev 命令（如 `npm run dev:mp-toutiao`）
+2. 打开对应开发者工具（微信开发者工具 / 抖音开发者工具）
+3. 导入 `dist/dev/mp-weixin` 或 `dist/dev/mp-toutiao` 目录
+4. 开发阶段可在开发者工具中勾选「不校验合法域名」以跳过域名配置
 
 ## 构建
 
@@ -28,6 +41,9 @@ npm run build:h5
 
 # 微信小程序构建
 npm run build:mp-weixin
+
+# 抖音小程序构建
+npm run build:mp-toutiao
 ```
 
 ## 技术栈
@@ -35,4 +51,17 @@ npm run build:mp-weixin
 - Vue 3
 - Vite
 - uni-app
-- Axios（H5 HTTP 请求）
+- uni.request（统一网络请求）
+
+## 支持平台
+
+- H5
+- 微信小程序
+- 抖音小程序
+- 支付宝小程序
+- 百度小程序
+- QQ 小程序
+- 快手小程序
+- 小红书小程序
+- 飞书小程序
+- 京东小程序
