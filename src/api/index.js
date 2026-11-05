@@ -1,71 +1,51 @@
-// ----------------------------------------- 百度新闻 -----------------------------------------//
-
-// 百度新闻请求
-export const baiduNews = (config) => {
+const request = (baseURL, config) => {
   return new Promise((resolve, reject) => {
+    const params = config.params || {};
+    const queryString = Object.keys(params)
+      .map(key => `${key}=${encodeURIComponent(params[key])}`)
+      .join('&');
+    
     // #ifdef H5
-    // H5 使用 axios
-    import('axios').then(({ default: axios }) => {
-      const instance = axios.create({
-        baseURL: '/baiduNews/',
-        timeout: 5000,
-      });
-      instance(config).then(resolve).catch(reject);
-    });
+    // 开发环境走代理
+    const url = `${baseURL.proxy}${config.url}?${queryString}`;
+    // #endif
+    
+    // #ifndef H5
+    // 非 H5 环境直接请求
+    const url = `${baseURL.direct}${config.url}?${queryString}`;
     // #endif
 
-    // #ifdef MP-WEIXIN
-    // 小程序使用 wx.request
-    const params = config.params || {};
-    const queryString = Object.keys(params).map(key => `${key}=${encodeURIComponent(params[key])}`).join('&');
-    const url = `https://news.baidu.com/${config.url}?${queryString}`;
-    
-    wx.request({
-      url: url,
+    uni.request({
+      url,
       method: config.method || 'GET',
       success: (res) => {
         resolve({ data: res.data });
       },
       fail: (err) => {
         reject(err);
-      }
+      },
     });
-    // #endif
   });
+};
+
+// ----------------------------------------- 百度新闻 -----------------------------------------//
+
+const baiduNewsBaseURL = {
+  proxy: '/baiduNews/',
+  direct: 'https://news.baidu.com/',
+};
+
+export const baiduNews = (config) => {
+  return request(baiduNewsBaseURL, config);
 };
 
 // ----------------------------------------- 淘宝搜索提示 -----------------------------------------//
 
-// 淘宝搜索提示请求
-export const taobaoSearchSuggest = (config) => {
-  return new Promise((resolve, reject) => {
-    // #ifdef H5
-    // H5 使用 axios
-    import('axios').then(({ default: axios }) => {
-      const instance = axios.create({
-        baseURL: '/taobaoSearchSuggest/',
-        timeout: 5000,
-      });
-      instance(config).then(resolve).catch(reject);
-    });
-    // #endif
+const taobaoBaseURL = {
+  proxy: '/taobaoSearchSuggest/',
+  direct: 'https://suggest.taobao.com/',
+};
 
-    // #ifdef MP-WEIXIN
-    // 小程序使用 wx.request
-    const params = config.params || {};
-    const queryString = Object.keys(params).map(key => `${key}=${encodeURIComponent(params[key])}`).join('&');
-    const url = `https://suggest.taobao.com/${config.url}?${queryString}`;
-    
-    wx.request({
-      url: url,
-      method: config.method || 'GET',
-      success: (res) => {
-        resolve({ data: res.data });
-      },
-      fail: (err) => {
-        reject(err);
-      }
-    });
-    // #endif
-  });
+export const taobaoSearchSuggest = (config) => {
+  return request(taobaoBaseURL, config);
 };
