@@ -5,7 +5,7 @@
       <text>H5 环境请直接使用浏览器打开</text>
     </div>
     <!-- #endif -->
-    <!-- #ifdef MP-WEIXIN -->
+    <!-- #ifndef H5 -->
     <web-view :src="url"></web-view>
     <!-- #endif -->
   </view>
