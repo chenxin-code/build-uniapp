@@ -2,6 +2,12 @@
 
 基于 uni-app (Vue 3 + Vite) 的跨平台项目，支持 H5、微信小程序、抖音小程序等多端运行。
 
+## 在线演示
+
+访问 https://chenxin-code.github.io/build-uniapp/build/h5/
+
+**注意：** 由于 GitHub Pages 是静态托管，无法配置 API 代理，且百度新闻和淘宝搜索接口不支持 CORS，因此生产环境无法调用接口。本地开发和小程序端可正常使用。
+
 ## 功能
 
 - API 测试页面（百度新闻、淘宝搜索提示）
