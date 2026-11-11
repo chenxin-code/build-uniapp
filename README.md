@@ -18,6 +18,8 @@
 3. 构建产物部署到 `gh-pages` 分支
 4. GitHub Pages 从 `gh-pages` 分支提供服务
 
+**base 路径配置：** 根据 `NODE_ENV` 动态设置，开发环境为 `/`，生产环境为 `/build-uniapp/`，兼容本地开发和 GitHub Pages 部署。
+
 ## 功能
 
 - API 测试页面（百度新闻、淘宝搜索提示）
