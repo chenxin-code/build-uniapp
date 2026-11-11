@@ -6,40 +6,30 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
-      - name: Checkout build-uniapp
+      - name: Checkout
         uses: actions/checkout@v4
+        with:
+          persist-credentials: false
 
-      - name: Setup Node
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
-          cache: 'npm'
+          node-version: '18'
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Install Dependencies
+        run: npm install
 
       - name: Build H5
         run: npm run build:h5
 
-      - name: Checkout chenxin-code.github.io
-        uses: actions/checkout@v4
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          repository: chenxin-code/chenxin-code.github.io
-          token: ${{ secrets.GITHUB_TOKEN }}
-          path: gh-pages
-          ref: master
-
-      - name: Deploy to build-uniapp directory
-        run: |
-          rm -rf gh-pages/build-uniapp
-          mkdir -p gh-pages/build-uniapp
-          cp -r dist/build/h5/* gh-pages/build-uniapp/
-          cd gh-pages
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add build-uniapp
-          git commit -m "Deploy build-uniapp H5 build" || echo "No changes to deploy"
-          git push
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist/build/h5
+          publish_branch: gh-pages

@@ -8,6 +8,16 @@
 
 **注意：** 由于 GitHub Pages 是静态托管，无法配置 API 代理，且百度新闻和淘宝搜索接口不支持 CORS，因此生产环境无法调用接口。本地开发和小程序端可正常使用。
 
+## 自动部署
+
+推送代码到 `master` 分支后，GitHub Actions 会自动构建 H5 并部署到 `gh-pages` 分支。
+
+部署流程：
+1. push 代码到 master 分支
+2. GitHub Actions 自动触发构建
+3. 构建产物部署到 `gh-pages` 分支
+4. GitHub Pages 从 `gh-pages` 分支提供服务
+
 ## 功能
 
 - API 测试页面（百度新闻、淘宝搜索提示）
